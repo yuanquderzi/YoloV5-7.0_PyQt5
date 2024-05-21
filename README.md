@@ -1,31 +1,5 @@
-<<<<<<< HEAD
-**更新2021.08.16**
-
-**添加图片和视频保存功能：
-
-1.图片和视频按照当前系统时间进行命名
-
-2.各自检测结果存放入output文件夹
-
-3.摄像头检测的默认设备序号更改为0，减少调试报错
-
-温馨提示：
-
-1.项目放置在全英文路径下，防止项目报错
-
-2.默认使用cpu进行检测，自己可以在init中手动切换GPU（因为我的笔记本太老了）
-
-3.当前的摄像头检测的存储有一点点问题，播放速度比较快，不知道是不是我用cpu检测，导致的帧率不匹配的问题（后面有时间在捣鼓捣鼓，我现在强制调慢了FPS😂）
-
-
 ## **一、项目简介**
-使用PyQt5为YoloV5添加一个可视化检测界面，并实现简单的界面跳转，具体情况如下：
-
-**博客与B站：**
-
-博客地址：https://blog.csdn.net/wrh975373911/article/details/119322059?spm=1001.2014.3001.5501
-
-B站视频：https://www.bilibili.com/video/BV1ZU4y1E7at
+给yolov5-7.0版本加个gui界面，使用pyqt5，包含注册和登录界面，分别采用定时器QTimer和线程QThread显示视频帧，并实现简单的界面跳转，具体情况如下：
 
 **特点：**
  1. UI界面与逻辑代码分离
@@ -43,11 +17,11 @@ B站视频：https://www.bilibili.com/video/BV1ZU4y1E7at
 
 **项目图片：**
 
-![登录界面](https://img-blog.csdnimg.cn/541206b4f8324a2794978672f4b35b81.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dyaDk3NTM3MzkxMQ==,size_16,color_FFFFFF,t_70)
-![注册界面](https://img-blog.csdnimg.cn/5ee90529650e41fb81065f17dcb40fc3.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dyaDk3NTM3MzkxMQ==,size_16,color_FFFFFF,t_70)
-
-![检测界面](https://img-blog.csdnimg.cn/9161046e7c0744328152f0cdca8748d6.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dyaDk3NTM3MzkxMQ==,size_16,color_FFFFFF,t_70)
-
+![登录界面](data/register.png)
+![注册界面](data/login.png)
+![图片检测](data/picture.png)
+![视频检测](data/video.png)
+![摄像头检测](data/camera.png)
 
 ## **二、快速开始**
 **环境与相关文件配置：**
