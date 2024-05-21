@@ -17,10 +17,15 @@
 
 **项目图片：**
 
-![登录界面](data/register.png)
+登录界面
+![登录界面](data/register.png)   
+注册界面
 ![注册界面](data/login.png)
+图片检测
 ![图片检测](data/picture.png)
+视频检测
 ![视频检测](data/video.png)
+摄像头检测
 ![摄像头检测](data/camera.png)
 
 ## **二、快速开始**
