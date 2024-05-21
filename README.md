@@ -20,6 +20,7 @@
 登录界面
 
 ![登录界面](data/register.png)
+
 注册界面
 
 ![注册界面](data/login.png)
