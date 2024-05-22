@@ -55,6 +55,7 @@
 
 ## **四、 联系方式**
 如需要完整项目，请联系
+
 <img src="data/wechat.jpg" width="50%">
 
 
