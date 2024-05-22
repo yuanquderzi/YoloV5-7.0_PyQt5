@@ -45,7 +45,7 @@
 
 **程序运行方式：**
 
- - 直接运行detect_logical.py，进入用定时器QTimer写的检测界面
+ - 直接运行detect_logical_qtimer.py，进入用定时器QTimer写的检测界面
  - 直接运行detect_logical_qthread.py，进入用线程QThread写的检测界面
  - 运行main_logical.py，先注册登录，再进入检测界面
 
@@ -55,7 +55,7 @@
 
 ## **四、 联系方式**
 如需要完整项目，请联系
-![个人微信](data/wechat.jpg)
+![个人微信](data/wechat.jpg width="30%")
 
 
 
