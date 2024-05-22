@@ -12,6 +12,9 @@ import os
 
 
 class UI_Logic_Window(QMainWindow, Ui_MainWindow):
+    iou_threshold_changed = pyqtSignal(float)
+    confidence_threshold_changed = pyqtSignal(float)
+
     def __init__(self, parent=None):
         super(UI_Logic_Window, self).__init__(parent)
         self.setupUi(self)
@@ -67,22 +70,26 @@ class UI_Logic_Window(QMainWindow, Ui_MainWindow):
         self.iou_threshold = self.doubleSpinBox_iou.value()
         # 同时更新滑块的值，以保持一致性
         self.horizontalSlider_iou.setValue(self.iou_threshold*100)
+        self.iou_threshold_changed.emit(self.iou_threshold)  # 发射阈值变化信号
 
     # 更新iou阈值的槽函数，由滑块触发
     def update_iou_threshold_from_slider(self):
         self.iou_threshold = self.horizontalSlider_iou.value() /100
         self.doubleSpinBox_iou.setValue(self.iou_threshold)  # 更新数值输入框的值
+        self.iou_threshold_changed.emit(self.iou_threshold)  # 发射阈值变化信号
 
     # 更新置信度阈值的槽函数
     def update_conf_threshold(self):
         self.confidence_threshold = self.doubleSpinBox_conf.value()
         # 同时更新滑块的值，以保持一致性
         self.horizontalSlider_conf.setValue(self.confidence_threshold*100)
+        self.confidence_threshold_changed.emit(self.confidence_threshold)  # 发射阈值变化信号
 
     # 更新置信度阈值的槽函数，由滑块触发
     def update_conf_threshold_from_slider(self):
         self.confidence_threshold = self.horizontalSlider_conf.value() /100
         self.doubleSpinBox_conf.setValue(self.confidence_threshold)  # 更新数值输入框的值
+        self.confidence_threshold_changed.emit(self.confidence_threshold)  # 发射阈值变化信号
 
     def clean_table(self):
         while (self.tableWidget.rowCount() > 0):
@@ -190,6 +197,8 @@ class UI_Logic_Window(QMainWindow, Ui_MainWindow):
             self.video_thread = VideoProcessingThread(self.cap, self.weights, self.vid_writer, self.iou_threshold, self.confidence_threshold)
             self.video_thread.frame_signal.connect(self.show_video_frame)
             self.video_thread.finished_signal.connect(self.on_video_thread_finished)  # 连接完成信号
+            self.iou_threshold_changed.connect(self.video_thread.update_iou_threshold)  # 连接阈值变化信号
+            self.confidence_threshold_changed.connect(self.video_thread.update_conf_threshold)  # 连接阈值变化信号
             self.video_thread.start()
             # 进行视频识别时，关闭其他按键点击功能
             self.pushButton_video.setDisabled(True)
@@ -217,6 +226,8 @@ class UI_Logic_Window(QMainWindow, Ui_MainWindow):
             self.video_thread = VideoProcessingThread(self.cap, self.weights, self.vid_writer, self.iou_threshold, self.confidence_threshold)
             self.video_thread.frame_signal.connect(self.show_video_frame)
             self.video_thread.finished_signal.connect(self.on_video_thread_finished)  # 连接完成信号
+            self.iou_threshold_changed.connect(self.video_thread.update_iou_threshold)  # 连接阈值变化信号
+            self.confidence_threshold_changed.connect(self.video_thread.update_conf_threshold)  # 连接阈值变化信号
             self.video_thread.start()
 
             self.pushButton_video.setDisabled(True)
@@ -292,6 +303,12 @@ class VideoProcessingThread(QThread):
     def stop(self):
         self.should_stop = True  # 设置标志以停止线程
         self.is_paused = False  # 确保线程能够退出循环
+
+    def update_iou_threshold(self, iou_thres):
+        self.iou_thres = iou_thres
+
+    def update_conf_threshold(self, conf_thres):
+        self.conf_thres = conf_thres
 
     @property
     def isRunning(self):
